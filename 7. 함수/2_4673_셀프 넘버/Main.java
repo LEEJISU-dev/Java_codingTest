@@ -1,31 +1,32 @@
-import java.util.Scanner;
-
 public class Main {
 
 	public static void main(String[] args) {
-		int a;	// 입력받을 수
-		int min;	// 최소값
-		int max;	// 최대값
+		boolean[] chk = new boolean[10001];
+		int n = 0;
+		for (int i = 1; i <= 10000; i++) {
+			n = d(i);
 
-		Scanner sc = new Scanner(System.in);
-		a = sc.nextInt();
-		int n[] = new int[a];
-
-		for (int i = 0; i < a; i++) {
-			n[i] = sc.nextInt();
-
-		}
-		max = n[0];
-		min = n[0];
-		for (int i = 1; i < a; i++) {
-			if (max <= n[i]) {
-				max = n[i];
-			}
-			if (min >= n[i]) {
-				min = n[i];
+			// 10000이 넘는 수는 필요 없음
+			if (n < 10001) {
+				chk[n] = true;
 			}
 		}
-		System.out.println(min+ " " +max );
+		for (int i = 1; i < chk.length; i++) {
+			if (!chk[i]) {
+				System.out.println(i);
+			}
+		}
+
+	}
+
+	public static int d(int i) {
+		int tmp = i;
+
+		while (i > 0) {
+			tmp += i % 10;
+			i /= 10;
+		}
+		return tmp;
 	}
 
 }
