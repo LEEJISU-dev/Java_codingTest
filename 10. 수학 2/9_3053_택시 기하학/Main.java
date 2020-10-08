@@ -1,22 +1,16 @@
 import java.util.Scanner;
 
 public class Main {
-
 	public static void main(String[] args) {
-		int a = 0; // 고정비용
-		int b = 0; // 가변비용
-		int c = 0; // 가격
+		double r = 0; // 입력받은 원의 반지름
 		
 		Scanner sc = new Scanner(System.in);
-		a = sc.nextInt();
-		b = sc.nextInt();
-		c = sc.nextInt();
-
-		if (b >= c) {
-			System.out.println(-1);
-		} else {
-			System.out.println(a/(c-b)+1);
-		}
+		r = sc.nextDouble();
+		
+		// 유클리드 원의 넓이 = 𝜋𝑟² 
+		System.out.println(r*r*Math.PI);	
+		// 택시기하학 원의 넓이 = 2𝑟² 
+		System.out.println(2*r*r); 			
 		
 	}
 
