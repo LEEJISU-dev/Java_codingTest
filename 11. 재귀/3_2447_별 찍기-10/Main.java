@@ -1,33 +1,56 @@
 import java.util.Scanner;
 
 public class Main {
+	static char[][] arr;
 
 	public static void main(String[] args) {
-		int input = 0; // 입력받은 수의 개수
-		int n = 0; // 입력받은 수(소수인지 판별)
-		int tmp = 0;	// 나누어 떨어지는 수 카운트
-		int count = 0; // 소수 카운트
+		int n = 0; // 입력받은 정수
 
 		Scanner sc = new Scanner(System.in);
-		input = sc.nextInt();
+		n = sc.nextInt();
+		arr = new char[n][n];
 
-		for (int i = 0; i < input; i++) {
-			n = sc.nextInt();
-			for (int j = 2; j <= n; j++) {
-				if (n % j == 0) {
-					tmp++;
-				}
+		star(0, 0, n, false);
+
+		StringBuilder sb = new StringBuilder();
+		// 출력
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				sb.append(arr[i][j]);
 			}
-			if (tmp < 2) {
-				count++;
-				if (n == 1) {
-					count--;
-				}
-			}
-			tmp = 0;
+			sb.append('\n');
 		}
-		System.out.println(count);
+		System.out.print(sb);
+	}
 
+	public static void star(int x, int y, int n, boolean blank) {
+		// 공백칸일 경우
+		if (blank) {
+			for (int i = x; i < x + n; i++) {
+				for (int j = y; j < y + n; j++) {
+					arr[i][j] = ' ';
+				}
+			}
+			return;
+		}
+		// 더이상 쪼갤 수 없는 블록일 때
+		if (n == 1) {
+			arr[x][y] = '*';
+			return;
+		}
+
+		int size = n / 3; // 해당 블록의 한 칸을 담을 변수
+		int count = 0; // 별 출력 누적
+		for (int i = x; i < x + n; i += size) {
+			for (int j = y; j < y + n; j += size) {
+				count++;
+				if (count == 5) {// 공백 칸일 경우
+					star(i, j, size, true);
+				} else {
+					star(i, j, size, false);
+				}
+			}
+		}
 	}
 
 }
