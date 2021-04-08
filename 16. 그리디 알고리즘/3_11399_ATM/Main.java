@@ -16,12 +16,14 @@ public class Main {
 		}
 		// 인출하는 시간을 오름차순으로 정렬
 		Arrays.sort(time);
-
+		
+		int pre=0;
 		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < i; j++) {
+			/*for (int j = 0; j < i; j++) {
 				min_time += time[j];
-			}
-			min_time += time[i];
+			}*/
+			min_time += pre + time[i];
+			pre += time[i];
 		}
 		System.out.println(min_time);
 
